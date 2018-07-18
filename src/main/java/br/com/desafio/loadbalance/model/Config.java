@@ -2,6 +2,9 @@ package br.com.desafio.loadbalance.model;
 
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class Config {
 
 	private List<Environment> environments;
