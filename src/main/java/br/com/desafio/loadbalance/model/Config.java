@@ -5,16 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.desafio.loadbalance.util.JsonUtil;
 import lombok.Data;
 
 @Data
-
 public class Config {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@JsonProperty("environments")
 	private List<Environment> environments;
@@ -24,23 +26,22 @@ public class Config {
 	private List<RuleType> ruleTypes;
 	@JsonProperty("targets")
 	private List<Target> targets;
-	//@JsonIgnore
-	//private List<Pool> pools;
-	//@JsonIgnore
-	//private List<VirtualHost> virtualhosts;
+	@JsonProperty("pools")
+	private List<Pool> pools;
+	@JsonProperty("virtualhosts")
+	private List<VirtualHost> virtualhosts;
 	
 	public Config deserealize(String path) {
 		byte[] jsonData;
 		try {
 			jsonData = Files.readAllBytes(Paths.get("src/main/resources/config.json"));
-			ObjectMapper objectMapper = new ObjectMapper();
+			ObjectMapper objectMapper = JsonUtil.initJsonMapper();
 			Config config = objectMapper.readValue(jsonData, Config.class);
-			System.out.println(config);
 			return config;
 		} catch (IOException e) {
+			logger.error("Erro ao deserializar objeto Config "+e.getMessage(),e);
 			return null;
 		}
-		
 	}
  	
 }

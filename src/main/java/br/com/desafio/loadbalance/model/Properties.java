@@ -9,5 +9,9 @@ public class Properties {
 	
 	@JsonProperty("healthy")
 	private String healthy;
+	@JsonProperty("healthCheckPath")
+	private String healthCheckPath;
+	@JsonProperty("loadBalancePolicy")
+	private String loadBalancePolicy;
 	
 }

@@ -1,13 +1,13 @@
 package br.com.desafio.loadbalance.service;
 
 public class LoadBalanceService {
-
-	public void aplicaPoliticaDeBalanceamento(String politica) {
-		
 	
+	public LoadBalanceService() {
+		
 	}
 	
-	
-	
+	public void aplicaPoliticaDeBalanceamento(String politica) {
+		
+	}
 	
 }

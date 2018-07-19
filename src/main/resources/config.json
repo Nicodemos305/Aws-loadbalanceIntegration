@@ -1,95 +1,99 @@
 {
-  "environments": [
-    {
-      "id": 1,
-      "name": "PROD"
-    }
-  ],
-  "projects": [
-    {
-      "id": 1,
-      "name": "MyProject"
-    }
-  ],
-  "ruleTypes": [
-    {
-      "id": 1,
-      "name": "UrlPath"
-    }
-  ],
-  "targets": [
-    {
-      "id": 1,
-      "name": "http://10.0.0.1:8080",
-      "properties": {
-        "healthy": "OK"
-      }
-    },
-    {
-      "id": 2,
-      "name": "http://10.0.0.2:8080",
-      "properties": {
-        "healthy": "OK"
-      }
-    },
-    {
-      "id": 3,
-      "name": "http://10.0.0.3:8080",
-      "properties": {
-        "healthy": "OK"
-      }
-    }
-  ]
+	"environments": [
+		{
+			"id": 1,
+			"name": "PROD"
+		}
+	],
+	"projects": [
+		{
+			"id": 1,
+			"name": "MyProject"
+		}
+	],
+	"ruleTypes": [
+		{
+			"id": 1,
+			"name": "UrlPath"
+		}
+	],
+	"targets": [
+		{
+			"id": 1,
+			"name": "http://10.0.0.1:8080",
+			"properties": {
+				"healthy": "OK"
+			}
+		},
+		{
+			"id": 2,
+			"name": "http://10.0.0.2:8080",
+			"properties": {
+				"healthy": "OK"
+			}
+		},
+		{
+			"id": 3,
+			"name": "http://10.0.0.3:8080",
+			"properties": {
+				"healthy": "OK"
+			}
+		}
+	],
+	"pools": [
+		{
+			"id": 1,
+			"name": "MyPool",
+			"properties": {
+				"healthCheckPath": "/healthcheck.html",
+				"loadBalancePolicy": "RoundRobin",
+				"targets": [
+					{
+						"targetId": 1
+					},
+					{
+						"targetId": 2
+					}
+				]
+			}
+		},
+		{
+			"id": 2,
+			"name": "OtherPool",
+			"properties": {
+				"healthCheckPath": "/healthcheck.html",
+				"loadBalancePolicy": "RoundRobin",
+				"targets": [
+					{
+						"targetId": 3
+					}
+				]
+			}
+		}
+	],
+	"virtualhosts": [
+		{
+			"name": "www.myserver.localdomain",
+			"environmentId": 1,
+			"projectId": 1,
+			"rules": [
+				{
+					"typeId": 1,
+					"poolId": 1,
+					"rulePath": "/xpto"
+				},
+				{
+					"typeId": 1,
+					"poolId": 2,
+					"rulePath": "/"
+				}
+			]
+		}
+	]
 }
 
-/*
 
 
-,
-  "pools": [
-    {
-      "id": 1,
-      "name": "MyPool",
-      "properties": {
-        "healthCheckPath": "/healthcheck.html",
-        "loadBalancePolicy": "RoundRobin",
-        "targets": [ 
-          { "targetId": 1 },
-          { "targetId": 2 }
-        ]
-      }
-    },
-    {
-      "id": 2,
-      "name": "OtherPool",
-      "properties": {
-        "healthCheckPath": "/healthcheck.html",
-        "loadBalancePolicy": "RoundRobin",
-        "targets": [ 
-          { "targetId": 3 }
-        ]
-      }
-    }
-  ],
-  "virtualhosts": [
-    {
-      "name": "www.myserver.localdomain",
-      "environmentId": 1,
-      "projectId": 1,
-      "rules": [
-        {
-          "typeId": 1,
-          "poolId": 1,
-          "rulePath": "/xpto"
-        },
-        {
-          "typeId": 1,
-          "poolId": 2,
-          "rulePath": "/"
-        }
-      ]
-    }
-  ]
 
 
-*/
+

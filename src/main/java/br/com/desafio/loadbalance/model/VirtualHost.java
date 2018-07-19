@@ -1,10 +1,20 @@
 package br.com.desafio.loadbalance.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
-@JsonIgnoreProperties
 @Data
 public class VirtualHost {
-
+	
+	@JsonProperty("name")
+	private String name;
+	@JsonProperty("environmentId")
+	private Integer environmentId;
+	@JsonProperty("projectId")
+	private Integer projectId;
+	@JsonProperty("rules")
+	private List<Rule> rules;
+	
 }
