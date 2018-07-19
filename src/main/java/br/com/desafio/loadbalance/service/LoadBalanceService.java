@@ -1,13 +1,65 @@
 package br.com.desafio.loadbalance.service;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import br.com.desafio.loadbalance.model.Config;
+
+@Service
 public class LoadBalanceService {
 	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	RestTemplate restTemplate;
+
+	
 	public LoadBalanceService() {
+		// TODO Auto-generated constructor stub
+	}
+	public  String insertPolicyELB(Config config,RestTemplateBuilder builder) {
+		String retorno = null;
+
+		try {
+			restTemplate = builder.build();
+			retorno = 	restTemplate.getForObject("", String.class);
+		}catch(Exception e) {
+			logger.error("Erro na camada service");
+		}
 		
+		return retorno;
 	}
 	
-	public void aplicaPoliticaDeBalanceamento(String politica) {
+
+	public String deletePolicyELB(Config config,RestTemplateBuilder builder) {
+		String retorno = null;
+
+		try {
+			restTemplate = builder.build();
+			retorno = 	restTemplate.getForObject("", String.class);
+		}catch(Exception e) {
+			logger.error("Erro na camada service");
+		}
 		
+		return retorno;
+	}
+	
+	
+	public  List<Config> listPolicyELB(Config config,RestTemplateBuilder builder) {
+		List<Config> retorno = null;
+
+		try {
+			restTemplate = builder.build();
+			retorno = 	restTemplate.getForObject("", List.class);
+		}catch(Exception e) {
+			logger.error("Erro na camada service");
+		}
+		
+		return retorno;
 	}
 	
 }
