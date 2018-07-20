@@ -14,27 +14,41 @@ public class RulesController  extends ControllerDefault{
 	@Autowired
 	private RulesService rulesService;
 	
-	
 	@PostMapping("/createRule")
 	public void createRule() {
-		rulesService.createRule();
+		try {
+			rulesService.createRule();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	
 	}
 	
 	@PostMapping("/deleteRule")
 	public void deleteRule() {
-		rulesService.deleteRule();
+		try {
+			rulesService.deleteRule();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
 	
 	@PostMapping("/describeRule")
 	public void describeRule() {
-		rulesService.describeRule();
+		try {
+			rulesService.describeRule();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 		
 	}
 	
 	@PostMapping("/modifyRule")
 	public void modifyRule() {
-		rulesService.modifyRule();
+		try {
+			rulesService.modifyRule();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
-	
 }

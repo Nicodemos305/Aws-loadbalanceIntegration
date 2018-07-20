@@ -16,22 +16,37 @@ public class TargetGroupController  extends ControllerDefault{
 	
 	@PostMapping("/createTargetGroup")
 	public void createTargetGroup() {
-		targetGroupService.createTargetGroup();
+		try {
+			targetGroupService.createTargetGroup();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
 	
 	@PostMapping("/deleteTargetGroup")
 	public void deleteTargetGroup() {
-		targetGroupService.deleteTargetGroup();
+		try {
+			targetGroupService.deleteTargetGroup();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
 	
 	@PostMapping("/describeTargetGroup")
 	public void describeTargetGroup() {
-		targetGroupService.describeTargetGroup();
+		try {
+			targetGroupService.describeTargetGroup();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
 	
 	@PostMapping("/modifyTargetGroup")
 	public void modifyTargetGroup() {
-		targetGroupService.modifyTargetGroup();
+		try {
+			targetGroupService.modifyTargetGroup();
+		}catch(Exception e) {
+			logger.error("Erro na camada de controle"+e.getMessage(),e);
+		}
 	}
-	
 }

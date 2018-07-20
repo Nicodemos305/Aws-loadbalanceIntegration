@@ -6,27 +6,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import br.com.desafio.loadbalance.model.Config;
 
 @Service
-public class LoadBalanceService {
+public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	RestTemplate restTemplate;
-
-	
-	public LoadBalanceService() {
-		// TODO Auto-generated constructor stub
-	}
-	public  String insertPolicyELB(Config config,RestTemplateBuilder builder) {
+	public  String insertPolicyELB(Config config) {
 		String retorno = null;
 
 		try {
-			restTemplate = builder.build();
-			retorno = 	restTemplate.getForObject("", String.class);
+			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
@@ -47,7 +39,6 @@ public class LoadBalanceService {
 		
 		return retorno;
 	}
-	
 	
 	public  List<Config> listPolicyELB(Config config,RestTemplateBuilder builder) {
 		List<Config> retorno = null;
