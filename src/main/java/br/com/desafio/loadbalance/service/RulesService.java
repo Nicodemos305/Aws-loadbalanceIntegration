@@ -8,7 +8,7 @@ public class RulesService extends ServiceDefault{
 	public void createRule() {
 		try {
 			String retorno = null;
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
+			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getCreateRule()), String.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
@@ -17,7 +17,7 @@ public class RulesService extends ServiceDefault{
 	public void deleteRule() {
 		try {
 			String retorno = null;
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
+			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getDeleteRule()), String.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
@@ -26,7 +26,7 @@ public class RulesService extends ServiceDefault{
 	public void describeRule() {
 		try {
 			String retorno = null;
-			retorno = restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
+			retorno = restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getDescribeRules()), String.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
@@ -35,7 +35,7 @@ public class RulesService extends ServiceDefault{
 	public void modifyRule() {
 		try {
 			String retorno = null;
-			retorno = restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
+			retorno = restTemplate.getForObject(ressources.getUrlAwsElb().concat(""), String.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
