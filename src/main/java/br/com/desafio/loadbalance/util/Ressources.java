@@ -9,98 +9,98 @@ public class Ressources {
 	@Value("${url.elb.amazon}")
 	private String UrlAwsElb;
 	
-	@Value("${aws.action.elb.CreateListener")
+	@Value("${aws.action.elb.CreateListener}")
 	private String CreateListener;
 	
-	@Value("${aws.action.elb.CreateLoadBalancer")
+	@Value("${aws.action.elb.CreateLoadBalancer}")
 	private String CreateLoadBalancer;
 	
-	@Value("${aws.action.elb.CreateRule")
+	@Value("${aws.action.elb.CreateRule}")
 	private String CreateRule;
 
-	@Value("${aws.action.elb.CreateTargetGroup")
+	@Value("${aws.action.elb.CreateTargetGroup}")
 	private String CreateTargetGroup;
 
-	@Value("${aws.action.elb.DeleteListener")
+	@Value("${aws.action.elb.DeleteListener}")
 	private String DeleteListener;
 
-	@Value("${aws.action.elb.DeleteLoadBalancer")
+	@Value("${aws.action.elb.DeleteLoadBalancer}")
 	private String DeleteLoadBalancer;
 	
 
-	@Value("${aws.action.elb.DeleteRule")
+	@Value("${aws.action.elb.DeleteRule}")
 	private String DeleteRule;
 	
-	@Value("${aws.action.elb.DeleteTargetGroup")
+	@Value("${aws.action.elb.DeleteTargetGroup}")
 	private String DeleteTargetGroup;
 	
-	@Value("${aws.action.elb.DeregisterTargets")
+	@Value("${aws.action.elb.DeregisterTargets}")
 	private String DeregisterTargets;
 
-	@Value("${aws.action.elb.DescribeListeners")
+	@Value("${aws.action.elb.DescribeListeners}")
 	private String DescribeListeners;
 	
 
-	@Value("${aws.action.elb.DescribeLoadBalancerAttributes")
+	@Value("${aws.action.elb.DescribeLoadBalancerAttributes}")
 	private String DescribeLoadBalancerAttributes;
 
-	@Value("${aws.action.elb.DescribeLoadBalancers")
+	@Value("${aws.action.elb.DescribeLoadBalancers}")
 	private String DescribeLoadBalancers;
 	
-	@Value("${aws.action.elb.DescribeRules")
+	@Value("${aws.action.elb.DescribeRules}")
 	private String DescribeRules;
 	
-	@Value("${aws.action.elb.DescribeSSLPolicies")
+	@Value("${aws.action.elb.DescribeSSLPolicies}")
 	private String DescribeSSLPolicies;
 	
-	@Value("${aws.action.elb.DescribeTags")
+	@Value("${aws.action.elb.DescribeTags}")
 	private String DescribeTags;
 	
-	@Value("${aws.action.elb.DescribeTargetGroupAttributes")
+	@Value("${aws.action.elb.DescribeTargetGroupAttributes}")
 	private String DescribeTargetGroupAttributes;
 	
-	@Value("${aws.action.elb.DescribeTargetGroups")
+	@Value("${aws.action.elb.DescribeTargetGroups}")
 	private String DescribeTargetGroups;
 	
-	@Value("${aws.action.elb.DescribeTargetHealth")
+	@Value("${aws.action.elb.DescribeTargetHealth}")
 	private String DescribeTargetHealth;
 
-	@Value("${aws.action.elb.ModifyListener")
+	@Value("${aws.action.elb.ModifyListener}")
 	private String ModifyListener;
 	
 
-	@Value("${aws.action.elb.ModifyLoadBalancerAttributes")
+	@Value("${aws.action.elb.ModifyLoadBalancerAttributes}")
 	private String ModifyLoadBalancerAttributes;
 	
 
-	@Value("${aws.action.elb.ModifyTargetGroup")
+	@Value("${aws.action.elb.ModifyTargetGroup}")
 	private String ModifyTargetGroup;
 
 
-	@Value("${aws.action.elb.ModifyTargetGroupAttributes")
+	@Value("${aws.action.elb.ModifyTargetGroupAttributes}")
 	private String ModifyTargetGroupAttributes;
 	
 
 
-	@Value("${aws.action.elb.RegisterTargets")
+	@Value("${aws.action.elb.RegisterTargets}")
 	private String RegisterTargets;
 	
 
-	@Value("${aws.action.elb.RemoveTags")
+	@Value("${aws.action.elb.RemoveTags}")
 	private String RemoveTags;
 
-	@Value("${aws.action.elb.SetIpAddressType")
+	@Value("${aws.action.elb.SetIpAddressType}")
 	private String SetIpAddressType;
 	
 
-	@Value("${aws.action.elb.SetRulePriorities")
+	@Value("${aws.action.elb.SetRulePriorities}")
 	private String SetRulePriorities;
 	
 
-	@Value("${aws.action.elb.SetSecurityGroups")
+	@Value("${aws.action.elb.SetSecurityGroups}")
 	private String SetSecurityGroups;
 	
-	@Value("${aws.action.elb.SetSubnets")
+	@Value("${aws.action.elb.SetSubnets}")
 	private String SetSubnets;
 
 	

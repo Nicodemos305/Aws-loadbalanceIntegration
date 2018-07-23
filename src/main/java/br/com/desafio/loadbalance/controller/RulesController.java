@@ -29,6 +29,7 @@ public class RulesController  extends ControllerDefault{
 	@PostMapping("/createRule")
 	public void createRule(Rule rule) {
 		try {
+			rulesService.setRestTemplate(builder);
 			rulesService.createRule(rule);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
