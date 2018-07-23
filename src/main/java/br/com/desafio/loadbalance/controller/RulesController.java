@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.desafio.loadbalance.aws.elb.model.Rule;
 import br.com.desafio.loadbalance.service.RulesService;
 
+/** 
+ * 
+ * Classe Controller referente ao assunto Rules.
+ * @author felipe.nicodemos 
+*/
 @RestController
 @RequestMapping("/Rules")
 public class RulesController  extends ControllerDefault{
@@ -15,6 +20,12 @@ public class RulesController  extends ControllerDefault{
 	@Autowired
 	private RulesService rulesService;
 	
+	/** 
+	 * 
+	 * Método responsável por criar um Rule
+	 * @param Rule rule
+	 *  
+	*/
 	@PostMapping("/createRule")
 	public void createRule(Rule rule) {
 		try {
@@ -25,6 +36,12 @@ public class RulesController  extends ControllerDefault{
 	
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por deletar um Rule
+	 * @param Rule rule
+	 *  
+	*/
 	@PostMapping("/deleteRule")
 	public void deleteRule(Rule rule) {
 		try {
@@ -34,6 +51,12 @@ public class RulesController  extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por listar  Rule
+	 * @param Rule rule
+	 *  
+	*/
 	@PostMapping("/describeRule")
 	public void describeRule(Rule rule) {
 		try {
@@ -44,6 +67,12 @@ public class RulesController  extends ControllerDefault{
 		
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por atualizar um Rule
+	 * @param Rule rule
+	 *  
+	*/
 	@PostMapping("/modifyRule")
 	public void modifyRule(Rule rule) {
 		try {

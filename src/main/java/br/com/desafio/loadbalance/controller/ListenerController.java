@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.desafio.loadbalance.aws.elb.model.Listener;
 import br.com.desafio.loadbalance.service.ListenerService;
 
+
+/** 
+ * 
+ * Classe Controller referente ao assunto Listener
+ * @author felipe.nicodemos	
+*/
 @RestController
 @RequestMapping("/Listener")
 public class ListenerController extends ControllerDefault{
@@ -16,6 +22,12 @@ public class ListenerController extends ControllerDefault{
 	@Autowired
 	private ListenerService listenerService;
 	
+	/** 
+	 * 
+	 * Método responsável por criar um Listener
+	 * @param Listener listener
+	 *  
+	*/
 	@PostMapping("createListener")
 	public void createListener(Listener listener) {
 		try {
@@ -25,6 +37,12 @@ public class ListenerController extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por deletar um Listener
+	 * @param Listener listener
+	 *  
+	*/
 	@GetMapping("/deleteListener")
 	public void deleteListener(Listener listener) {
 		try {
@@ -34,6 +52,12 @@ public class ListenerController extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por listar Listener
+	 * @param Listener listener
+	 *  
+	*/
 	@PostMapping("/describeListener")
 	public void describeListener(Listener listener) {
 		try {
@@ -43,6 +67,12 @@ public class ListenerController extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por atualizar um Listener
+	 * @param Listener listener
+	 *  
+	*/
 	@PostMapping("/modifyListener")
 	public void modifyListener(Listener listener) {
 		try {

@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.desafio.loadbalance.service.LoadBalanceService;
 
+/** 
+ * 
+ * Classe Controller referente ao assunto LoadBalance
+ * @author felipe.nicodemos 
+*/
 @RestController
 @RequestMapping("/")
 public class LoadBalanceController extends ControllerDefault{

@@ -5,6 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 
+/** 
+ * 
+ * Classe Controller default
+ * @author felipe.nicodemos
+*/
 public class ControllerDefault  {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());

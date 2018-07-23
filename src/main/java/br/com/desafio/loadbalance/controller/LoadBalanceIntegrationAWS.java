@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.desafio.loadbalance.model.Config;
 import br.com.desafio.loadbalance.service.LoadBalanceIntegrationAWSservice;
 
+
+/** 
+ * 
+ * Classe Controller referente ao assunto integração LoadBalance AWS.
+ * @author felipe.nicodemos 
+*/
 @RestController
 @RequestMapping("/LoadBalanceIntegrationAWS")
 public class LoadBalanceIntegrationAWS extends ControllerDefault{
@@ -17,6 +23,11 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	@Autowired
 	private LoadBalanceIntegrationAWSservice loadBalanceIntegrationAWSservice;
 	
+	/** 
+	 * 
+	 * Método responsável por criar um LoadBalance
+	 * @param  Config config
+	*/
 	@PostMapping("/createLoadBalance")
 	public  @ResponseBody Config createLoadBalance(@RequestBody(required=true) Config config) {
 		try {
@@ -28,14 +39,19 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 		return config;
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por criar um LoadBalance atráves de um Path
+	 * @param  Srting path
+	*/
 	@PostMapping("/createLoadBalancePath")
-	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) Config config) {
+	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) String path) {
 		try {
 			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalancePath(config);
+			loadBalanceIntegrationAWSservice.createLoadBalancePath(path);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
-		return config;
+		return null;
 	}
 }

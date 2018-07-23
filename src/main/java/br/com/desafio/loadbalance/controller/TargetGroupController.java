@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.desafio.loadbalance.service.TargetGroupService;
 
+
+/** 
+ * 
+ * Classe Controller referente ao assunto TargetGroupController.
+ * @author felipe.nicodemos 
+*/
 @RestController
 @RequestMapping("/TargetGroup")
 public class TargetGroupController  extends ControllerDefault{
@@ -14,6 +20,12 @@ public class TargetGroupController  extends ControllerDefault{
 	@Autowired
 	private TargetGroupService targetGroupService;
 	
+	/** 
+	 * 
+	 * Método responsável por criar um TargetGroup
+	 * @param TargetGroup  targetGroup
+	 *  
+	*/
 	@PostMapping("/createTargetGroup")
 	public void createTargetGroup() {
 		try {
@@ -23,6 +35,12 @@ public class TargetGroupController  extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por deletar um TargetGroup
+	 * @param TargetGroup  targetGroup
+	 *  
+	*/
 	@PostMapping("/deleteTargetGroup")
 	public void deleteTargetGroup() {
 		try {
@@ -32,6 +50,12 @@ public class TargetGroupController  extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por listar  TargetGroup
+	 * @param TargetGroup  targetGroup
+	 *  
+	*/
 	@PostMapping("/describeTargetGroup")
 	public void describeTargetGroup() {
 		try {
@@ -41,6 +65,12 @@ public class TargetGroupController  extends ControllerDefault{
 		}
 	}
 	
+	/** 
+	 * 
+	 * Método responsável por atualizar um TargetGroup
+	 * @param TargetGroup  targetGroup
+	 *  
+	*/
 	@PostMapping("/modifyTargetGroup")
 	public void modifyTargetGroup() {
 		try {

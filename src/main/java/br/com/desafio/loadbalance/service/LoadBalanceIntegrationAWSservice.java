@@ -16,7 +16,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 		return retorno;
 	}
 	
-	public  String createLoadBalancePath(Config config) {
+	public  String createLoadBalancePath(String path) {
 		String retorno = null;
 
 		try {
