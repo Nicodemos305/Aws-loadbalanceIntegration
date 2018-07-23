@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.desafio.loadbalance.aws.elb.model.Rule;
 import br.com.desafio.loadbalance.service.RulesService;
 
 @RestController
@@ -15,9 +16,9 @@ public class RulesController  extends ControllerDefault{
 	private RulesService rulesService;
 	
 	@PostMapping("/createRule")
-	public void createRule() {
+	public void createRule(Rule rule) {
 		try {
-			rulesService.createRule();
+			rulesService.createRule(rule);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
@@ -25,18 +26,18 @@ public class RulesController  extends ControllerDefault{
 	}
 	
 	@PostMapping("/deleteRule")
-	public void deleteRule() {
+	public void deleteRule(Rule rule) {
 		try {
-			rulesService.deleteRule();
+			rulesService.deleteRule(rule);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
 	}
 	
 	@PostMapping("/describeRule")
-	public void describeRule() {
+	public void describeRule(Rule rule) {
 		try {
-			rulesService.describeRule();
+			rulesService.describeRule(rule);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
@@ -44,9 +45,9 @@ public class RulesController  extends ControllerDefault{
 	}
 	
 	@PostMapping("/modifyRule")
-	public void modifyRule() {
+	public void modifyRule(Rule rule) {
 		try {
-			rulesService.modifyRule();
+			rulesService.modifyRule(rule);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}

@@ -1,13 +1,9 @@
 package br.com.desafio.loadbalance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.desafio.loadbalance.model.Config;
 import br.com.desafio.loadbalance.service.LoadBalanceService;
 
 @RestController
@@ -16,18 +12,6 @@ public class LoadBalanceController extends ControllerDefault{
 
 	@Autowired
 	private LoadBalanceService loadBalanceService;
-	
 
-
-	@PostMapping("/insertPolicyELB")
-	public  @ResponseBody Config insertPolicyELB(@RequestBody(required=true) Config config) {
-		try {
-			loadBalanceService.setRestTemplate(builder);
-			loadBalanceService.insertPolicyELB(config);
-		}catch(Exception e) {
-			logger.error("Erro na camada de controle"+e.getMessage(),e);
-		}
-		return config;
-	}
 
 }
