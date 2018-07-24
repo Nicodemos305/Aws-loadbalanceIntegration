@@ -16,7 +16,7 @@ public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public  CreateLoadBalancerResponse createLoadBalance(LoadBalancer loadBalancer) {
+	public  CreateLoadBalancerResponse createLoadBalance(LoadBalancer loadBalancer,String signature) {
 		CreateLoadBalancerResponse retorno = null;
 		try {
 			 retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), CreateLoadBalancerResponse.class);

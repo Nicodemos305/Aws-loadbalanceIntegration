@@ -40,6 +40,7 @@ Consumir o serviço
   method: post
   parâmetro: Json com as configurações de um AWS ELB genérico.
   
+  ```javascript
   {
 	"environments": [
 		{
@@ -133,7 +134,7 @@ Consumir o serviço
 		}
 	]
 }
-
+```javascript
 Exemplo 2
 
 url:    localhost:8082/LoadBalanceIntegrationAWS/createLoadBalancePath?path=www.teste.com.br/config.json

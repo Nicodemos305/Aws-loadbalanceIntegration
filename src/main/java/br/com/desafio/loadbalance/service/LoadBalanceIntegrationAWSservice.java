@@ -2,7 +2,6 @@ package br.com.desafio.loadbalance.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	@Autowired
 	private TargetGroupService targetGroupService;
 	
-	public  String createLoadBalance(Config config) {
+	public  String createLoadBalance(Config config,String signature) {
 
 		try {
 			Environment environmentDefault = null;
@@ -42,12 +41,12 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				
 				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
 				projectDefault = projectObj.get();
-				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault));
+				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault),signature);
 				
 				rulesDefault = virtualHost.getRules();
 				
 				for(Rule rule : rulesDefault) {
-					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()), null);
+					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
 				}
 				
 				

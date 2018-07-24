@@ -31,8 +31,6 @@ public class ControllerDefault  {
 	
 	private String signature;
 	
-
-
 	public String assinar(Ressources Ressources) {
 		if(signature != null) {
 			return signature;
