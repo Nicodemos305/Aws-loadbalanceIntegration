@@ -134,7 +134,7 @@ Consumir o serviço
 		}
 	]
 }
-```javascript
+
 Exemplo 2
 
 url:    localhost:8082/LoadBalanceIntegrationAWS/createLoadBalancePath?path=www.teste.com.br/config.json
