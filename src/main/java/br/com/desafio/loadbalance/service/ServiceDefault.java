@@ -1,12 +1,13 @@
 package br.com.desafio.loadbalance.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.desafio.loadbalance.util.Ressources;
@@ -28,15 +29,17 @@ public class ServiceDefault {
 		this.restTemplate = restTemplate;
 	}
 	
-	public 	Map<String,String>  gerarHeaderRequest() {
-		Map<String,String> mapa = new HashMap<String,String>();
-		mapa.put("X-Amz-Algorithm","");
-		mapa.put("X-Amz-Credential","");
-		mapa.put("X-Amz-Date","");
-		mapa.put("X-Amz-Expires","");
-		mapa.put("X-Amz-SignedHeaders","");
-		mapa.put("X-Amz-Signature","");
-		return mapa;
+	public 	HttpHeaders  gerarHeaderRequest() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("X-Amz-Algorithm","");
+		headers.set("X-Amz-Credential","");
+		headers.set("X-Amz-Date","");
+		headers.set("X-Amz-Expires","");
+		headers.set("X-Amz-SignedHeaders","");
+		headers.set("X-Amz-Signature","");
+		return headers;
 	}
 	
 }

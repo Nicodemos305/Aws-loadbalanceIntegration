@@ -2,6 +2,7 @@ package br.com.desafio.loadbalance.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,6 @@ public class ControllerDefault  {
 	@Autowired
 	RestTemplateBuilder builder;
 	
-
 	@Autowired
 	protected Ressources ressources;
 	
@@ -36,8 +36,8 @@ public class ControllerDefault  {
 			return signature;
 		}
 		Date dataStamp = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDD'T'HHMMSS'Z'");
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			setSignature(AmazonSignature.recoveryAWSassignatureV4(ressources.getKey(),sdf.format(dataStamp).toString(),ressources.getRegionName(),ressources.getServiceName()));
 			return signature;
@@ -57,7 +57,5 @@ public class ControllerDefault  {
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
-	
-	
 	
 }

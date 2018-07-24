@@ -3,6 +3,13 @@ package br.com.desafio.loadbalance.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+
+/** 
+ * 
+ * Classe com os recursos utilizados pela aplicação 
+ * 
+ * @author felipe.nicodemos
+*/
 @Component
 public class Ressources {
 

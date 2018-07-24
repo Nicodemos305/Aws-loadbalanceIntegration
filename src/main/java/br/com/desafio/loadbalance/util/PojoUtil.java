@@ -11,6 +11,12 @@ import br.com.desafio.loadbalance.model.Pool;
 import br.com.desafio.loadbalance.model.Project;
 import br.com.desafio.loadbalance.model.RuleType;
 
+/** 
+ * 
+ * Classe utilitária para converter Pojos da aplicação 
+ * para dos serviços AWS
+ * @author felipe.nicodemos
+*/
 public class PojoUtil {
 
 	

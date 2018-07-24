@@ -15,31 +15,5 @@ public class ListenerService extends ServiceDefault{
 			logger.error("Erro na camada service");
 		}
 	}
-	
-	public void deleteListener(Listener listener) {
-		try {
-			String retorno = null;
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getDeleteListener()), String.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-	}
-	
-	public void describeListener(Listener listener) {
-		try {
-			String retorno = null;
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getDescribeListeners()), String.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-	}
-	
-	public void modifyListener(Listener listener) {
-		try {
-			String retorno = null;
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getModifyListener()), String.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-	}
+
 }

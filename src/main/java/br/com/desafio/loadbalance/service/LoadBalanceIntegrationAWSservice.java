@@ -52,12 +52,8 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				
 				
 			}
-			
-			
-		//	loadBalanceService.insertPolicyELB(null);
 		//	listenerService.createListener(null);
-			//rulesService.createRule(null);
-			targetGroupService.createTargetGroup();
+		//	targetGroupService.createTargetGroup();
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}
