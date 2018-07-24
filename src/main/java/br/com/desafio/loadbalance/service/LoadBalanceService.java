@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 
+import br.com.desafio.loadbalance.aws.elb.model.CreateLoadBalancerResponse;
 import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
 import br.com.desafio.loadbalance.model.Config;
 
@@ -15,11 +16,10 @@ public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public  String createLoadBalance(LoadBalancer loadBalancer) {
-		String retorno = null;
-
+	public  CreateLoadBalancerResponse createLoadBalance(LoadBalancer loadBalancer) {
+		CreateLoadBalancerResponse retorno = null;
 		try {
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
+			 retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), CreateLoadBalancerResponse.class);
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}

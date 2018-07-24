@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.desafio.loadbalance.model.Config;
+import br.com.desafio.loadbalance.model.RuleType;
 import br.com.desafio.loadbalance.service.LoadBalanceIntegrationAWSservice;
 
 
