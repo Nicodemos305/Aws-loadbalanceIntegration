@@ -17,5 +17,6 @@ public class TargetGroup {
 	private String vPcId;
 	@JsonProperty("version")
 	private String version;
-		
+
+	
 }

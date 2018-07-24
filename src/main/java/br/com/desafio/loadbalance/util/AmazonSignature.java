@@ -55,9 +55,7 @@ public class AmazonSignature {
 	static byte[] getSignatureKey(String key, String dateStamp, String regionName, String serviceName)
 			throws Exception {
 		byte[] kSecret = ("AWS4" + key).getBytes("UTF8");
-		System.out.println(kSecret);
 		byte[] kDate = HmacSHA256(dateStamp, kSecret);
-		System.out.println(kDate);
 		byte[] kRegion = HmacSHA256(regionName, kDate);
 		byte[] kService = HmacSHA256(serviceName, kRegion);
 		byte[] kSigning = HmacSHA256("aws4_request", kService);

@@ -1,9 +1,18 @@
 package br.com.desafio.loadbalance.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.desafio.loadbalance.model.Config;
+import br.com.desafio.loadbalance.model.Environment;
+import br.com.desafio.loadbalance.model.Project;
+import br.com.desafio.loadbalance.model.Rule;
+import br.com.desafio.loadbalance.model.VirtualHost;
+import br.com.desafio.loadbalance.util.PojoUtil;
 
 @Service
 public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
@@ -23,9 +32,31 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	public  String createLoadBalance(Config config) {
 
 		try {
-			loadBalanceService.insertPolicyELB(null);
-			listenerService.createListener(null);
-			rulesService.createRule(null);
+			Environment environmentDefault = null;
+			Project projectDefault = null;
+			List<Rule> rulesDefault = null;
+			
+			for(VirtualHost virtualHost : config.getVirtualhosts()) {
+				Optional<Environment> environmentObj = config.getEnvironments().stream().filter(environment -> environment.getId().equals(virtualHost.getEnvironmentId())).findAny();
+				environmentDefault = environmentObj.get();
+				
+				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
+				projectDefault = projectObj.get();
+				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault));
+				
+				rulesDefault = virtualHost.getRules();
+				
+				for(Rule rule : rulesDefault) {
+					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()), null);
+				}
+				
+				
+			}
+			
+			
+		//	loadBalanceService.insertPolicyELB(null);
+		//	listenerService.createListener(null);
+			//rulesService.createRule(null);
 			targetGroupService.createTargetGroup();
 		}catch(Exception e) {
 			logger.error("Erro na camada service");

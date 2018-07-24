@@ -23,5 +23,5 @@ public class Listener {
 	private String DefaultActions;
 	@JsonProperty("Version")
 	private String Version;
-	
+
 }

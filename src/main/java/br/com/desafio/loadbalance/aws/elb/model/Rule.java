@@ -19,5 +19,6 @@ public class Rule {
 	private List<String> Actions;
 	@JsonProperty("Version")
 	private String Version;
+
 	
 }

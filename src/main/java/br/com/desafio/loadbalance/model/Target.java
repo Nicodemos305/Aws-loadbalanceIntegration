@@ -12,5 +12,5 @@ public class Target extends Base{
 	@JsonProperty("properties")
 	private Properties properties;
 	
-
+	
 }

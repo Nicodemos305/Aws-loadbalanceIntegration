@@ -14,4 +14,5 @@ public class Properties {
 	@JsonProperty("loadBalancePolicy")
 	private String loadBalancePolicy;
 	
+
 }

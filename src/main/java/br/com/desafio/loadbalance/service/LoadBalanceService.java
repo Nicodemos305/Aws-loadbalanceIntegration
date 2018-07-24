@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 
+import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
 import br.com.desafio.loadbalance.model.Config;
 
 @Service
@@ -14,7 +15,7 @@ public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public  String insertPolicyELB(Config config) {
+	public  String createLoadBalance(LoadBalancer loadBalancer) {
 		String retorno = null;
 
 		try {

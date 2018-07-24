@@ -100,9 +100,19 @@ public class Ressources {
 	@Value("${aws.action.elb.SetSecurityGroups}")
 	private String SetSecurityGroups;
 	
+	@Value("${serviceName}")
+	private String serviceName;
+
+	
+	@Value("${regionName}")
+	private String regionName;
+	
 	@Value("${aws.action.elb.SetSubnets}")
 	private String SetSubnets;
-
+	
+	@Value("${key}")
+	private String key;
+	
 	
 	public String getCreateListener() {
 		return CreateListener;
@@ -335,5 +345,30 @@ public class Ressources {
 	public void setUrlAwsElb(String urlAwsElb) {
 		UrlAwsElb = urlAwsElb;
 	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public String getRegionName() {
+		return regionName;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
 	
 }
