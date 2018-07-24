@@ -51,8 +51,12 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	@PostMapping("/createLoadBalancePath")
 	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) String path) {
 		try {
+			if(getSignature() == null) {
+				assinar(ressources);
+			}
+			
 			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalancePath(path);
+			loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),getSignature());
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}

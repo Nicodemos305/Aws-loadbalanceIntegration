@@ -31,7 +31,7 @@ public class Config {
 	@JsonProperty("virtualhosts")
 	private List<VirtualHost> virtualhosts;
 	
-	public Config deserealize(String path) {
+	public static Config deserealize(String path) {
 		byte[] jsonData;
 		try {
 			jsonData = Files.readAllBytes(Paths.get("src/main/resources/config.json"));
@@ -39,7 +39,7 @@ public class Config {
 			Config config = objectMapper.readValue(jsonData, Config.class);
 			return config;
 		} catch (IOException e) {
-			logger.error("Erro ao deserializar objeto Config "+e.getMessage(),e);
+			//logger.error("Erro ao deserializar objeto Config "+e.getMessage(),e);
 			return null;
 		}
 	}

@@ -1,13 +1,14 @@
 package br.com.desafio.loadbalance.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 
-import br.com.desafio.loadbalance.aws.elb.model.CreateLoadBalancerResponse;
 import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
 import br.com.desafio.loadbalance.model.Config;
 
@@ -16,37 +17,12 @@ public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public  CreateLoadBalancerResponse createLoadBalance(LoadBalancer loadBalancer,String signature) {
-		CreateLoadBalancerResponse retorno = null;
+	public  String createLoadBalance(LoadBalancer loadBalancer,String signature) {
+		String  retorno = null;
 		try {
-			 retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), CreateLoadBalancerResponse.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-		
-		return retorno;
-	}
-	
-
-	public String deletePolicyELB(Config config,RestTemplateBuilder builder) {
-		String retorno = null;
-
-		try {
-			restTemplate = builder.build();
-			retorno = 	restTemplate.getForObject("", String.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-		
-		return retorno;
-	}
-	
-	public  List<Config> listPolicyELB(Config config,RestTemplateBuilder builder) {
-		List<Config> retorno = null;
-
-		try {
-			restTemplate = builder.build();
-			retorno = 	restTemplate.getForObject("", List.class);
+			Map<String,String> mapa = gerarHeaderRequest();
+			 retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb().concat(ressources.getCreateLoadBalancer()), String.class);
+			// restTemplate.getForObject(url, responseType, uriVariables)
 		}catch(Exception e) {
 			logger.error("Erro na camada service");
 		}

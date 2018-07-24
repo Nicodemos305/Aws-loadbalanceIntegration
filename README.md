@@ -8,7 +8,7 @@ Projeto destinado a configuração de um AWS ELB (Amazon Webservices Elastic Loa
     Ter uma conta AWS com os recursos EC2 disponíveis.
   </li>
   <li>
-    Importar o projeto na IDE de sua prefência que tenha suporte a linguagem Java.
+    Importar o projeto na IDE de sua preferência que tenha suporte a linguagem Java.
   </li>
   <li>
     Executar o comando Maven Update Project (para instalação de depências definidas no pom.xml).

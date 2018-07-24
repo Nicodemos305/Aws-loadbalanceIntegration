@@ -41,6 +41,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				
 				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
 				projectDefault = projectObj.get();
+				loadBalanceService.setRestTemplate(this.restTemplate);
 				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault),signature);
 				
 				rulesDefault = virtualHost.getRules();
@@ -62,18 +63,6 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 		}
 		
 		return null;
-	}
-	
-	public  String createLoadBalancePath(String path) {
-		String retorno = null;
-
-		try {
-			retorno = 	restTemplate.getForObject(ressources.getUrlAwsElb(), String.class);
-		}catch(Exception e) {
-			logger.error("Erro na camada service");
-		}
-		
-		return retorno;
 	}
 	
 }

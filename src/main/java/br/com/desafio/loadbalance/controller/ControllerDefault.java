@@ -36,7 +36,7 @@ public class ControllerDefault  {
 			return signature;
 		}
 		Date dataStamp = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDD'T'HHMMSS'Z'");
 		
 		try {
 			setSignature(AmazonSignature.recoveryAWSassignatureV4(ressources.getKey(),sdf.format(dataStamp).toString(),ressources.getRegionName(),ressources.getServiceName()));
