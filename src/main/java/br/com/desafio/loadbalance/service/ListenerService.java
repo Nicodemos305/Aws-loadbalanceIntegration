@@ -31,6 +31,7 @@ public class ListenerService extends ServiceDefault{
 			listeners.add(listener);
 			createLoadBalancerListenersRequest.setListeners(listeners);
 			client.createLoadBalancerListeners(createLoadBalancerListenersRequest);
+			result.getMensagens().add("ListenerConfigrado para o ELB "+loadBalanceName);
 		}catch(Exception e) {
 			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
 			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);

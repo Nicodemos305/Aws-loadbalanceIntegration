@@ -42,7 +42,7 @@ public class LoadBalanceService extends ServiceDefault{
 		    lbRequest.setLoadBalancerName(loadBalancer.getName());
 		    lbRequest.setSubnets(loadBalancer.getSubNets());
 		    client.createLoadBalancer(lbRequest);
-			
+			result.getMensagens().add("ELB  "+loadBalancer.getName()+" Cadastrado com sucesso!");
 		}catch(DuplicateLoadBalancerNameException e1) {
 			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e1.getMessage());
 			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e1.getMessage(),e1);

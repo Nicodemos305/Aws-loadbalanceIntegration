@@ -29,6 +29,7 @@ public class ConfigureHealthCheck extends ServiceDefault{
 			configureHealthCheckRequest.setHealthCheck(healthCheck);
 			configureHealthCheckRequest.setLoadBalancerName(loadBalanceName);
 			client.configureHealthCheck(configureHealthCheckRequest);
+			result.getMensagens().add("HealthCheck configurado para o ELB "+loadBalanceName);
 		}catch(Exception e) {
 			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
 			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);
