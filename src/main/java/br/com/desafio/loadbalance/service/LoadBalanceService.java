@@ -11,6 +11,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
 import com.amazonaws.services.elasticloadbalancing.model.CreateLoadBalancerRequest;
+import com.amazonaws.services.elasticloadbalancing.model.DuplicateLoadBalancerNameException;
 import com.amazonaws.services.elasticloadbalancing.model.Listener;
 
 import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
@@ -28,25 +29,25 @@ public class LoadBalanceService extends ServiceDefault{
 			
 			AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(credentials);
 			
-			client.builder().setRegion("us-east-2");
-			client.setEndpoint("elasticloadbalancing.us-east-2.amazonaws.com");
-			CreateLoadBalancerRequest createLoadBalance = new CreateLoadBalancerRequest();
+			client.builder().setRegion(ressources.getRegionName());
+			client.setEndpoint(ressources.getUrlAwsElb());
 				
 		    CreateLoadBalancerRequest lbRequest = new CreateLoadBalancerRequest();
 		    Listener listener = new Listener();
 		    listener.setInstancePort(8081);
 		    listener.setInstanceProtocol("http");
-		    listener.setLoadBalancerPort(25);
+		    listener.setLoadBalancerPort(8080);
 		    listener.setProtocol("http");
 		    List<Listener> lista = new ArrayList<Listener>();
 		    lista.add(listener);
 		    lbRequest.setListeners(lista);
 		    lbRequest.setLoadBalancerName(loadBalancer.getName());
-		    List<String> subnet = new ArrayList<String>();
-		    subnet.add("subnet-911259f9");
-		    lbRequest.setSubnets(subnet);
+		    lbRequest.setSubnets(loadBalancer.getSubNets());
+	
 		    client.createLoadBalancer(lbRequest);
 			
+		}catch(DuplicateLoadBalancerNameException e1) {
+			logger.error("Erro de  chave duplicacada na camada service",e1);
 		}catch(Exception e) {
 			logger.error("Erro na camada service",e);
 		}
@@ -54,8 +55,5 @@ public class LoadBalanceService extends ServiceDefault{
 		return retorno;
 	}
 	
-	
-
-
 	
 }

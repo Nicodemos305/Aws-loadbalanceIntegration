@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.desafio.loadbalance.model.Config;
+import br.com.desafio.loadbalance.model.Result;
 import br.com.desafio.loadbalance.service.LoadBalanceIntegrationAWSservice;
 
 
@@ -29,14 +30,15 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	 * @param  Config config
 	*/
 	@PostMapping("/createLoadBalance")
-	public  @ResponseBody Config createLoadBalance(@RequestBody(required=true) Config config) {
+	public  @ResponseBody Result createLoadBalance(@RequestBody(required=true) Config config) {
+		Result result = null;
 		try {
-			
-			loadBalanceIntegrationAWSservice.createLoadBalance(config);
+			 result = loadBalanceIntegrationAWSservice.createLoadBalance(config);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
-		return config;
+		
+		return  result;
 	}
 	
 	/** 

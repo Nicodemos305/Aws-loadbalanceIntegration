@@ -1,6 +1,7 @@
 package br.com.desafio.loadbalance.model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,7 +15,12 @@ import br.com.desafio.loadbalance.util.JsonUtil;
 import lombok.Data;
 
 @Data
-public class Config {
+public class Config  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2383499243592305076L;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -10,5 +10,19 @@ public class Pool extends Base{
 	private Properties properties;
 	@JsonProperty("targets")
 	private List<Target> targets;
+	public Properties getProperties() {
+		return properties;
+	}
+	public List<Target> getTargets() {
+		return targets;
+	}
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+	public void setTargets(List<Target> targets) {
+		this.targets = targets;
+	}
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 package br.com.desafio.loadbalance.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.desafio.loadbalance.aws.elb.model.Listener;
@@ -10,6 +11,7 @@ import br.com.desafio.loadbalance.model.Config;
 import br.com.desafio.loadbalance.model.Pool;
 import br.com.desafio.loadbalance.model.Project;
 import br.com.desafio.loadbalance.model.RuleType;
+import br.com.desafio.loadbalance.model.Target;
 
 /** 
  * 
@@ -21,9 +23,19 @@ public class PojoUtil {
 
 	
 	
-	public static LoadBalancer fromToLoadBalancer(Project project) {
+	public static LoadBalancer fromToLoadBalancer(Project project,Config config) {
 		LoadBalancer loadBalancer = new LoadBalancer();
 		loadBalancer.setName(project.getName());
+		
+		List<String> subNets = new ArrayList<String>();
+		
+		for(Target target : config.getTargets()) {
+			if(target != null && target.getName() != null) {
+				subNets.add(target.getName());
+			}
+		}
+		loadBalancer.setSubNets(subNets);
+	
 		return loadBalancer;
 		
 	}

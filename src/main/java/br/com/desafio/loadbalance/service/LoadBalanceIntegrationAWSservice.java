@@ -1,15 +1,16 @@
 package br.com.desafio.loadbalance.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
 import br.com.desafio.loadbalance.model.Config;
 import br.com.desafio.loadbalance.model.Environment;
+import br.com.desafio.loadbalance.model.Pool;
 import br.com.desafio.loadbalance.model.Project;
-import br.com.desafio.loadbalance.model.Rule;
+import br.com.desafio.loadbalance.model.Result;
 import br.com.desafio.loadbalance.model.VirtualHost;
 import br.com.desafio.loadbalance.util.PojoUtil;
 
@@ -20,45 +21,35 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	private LoadBalanceService loadBalanceService;
 	
 	@Autowired
-	private ListenerService listenerService;
+	private ConfigureHealthCheck configureHealthCheck;
 	
-	@Autowired
-	private RulesService rulesService;
-
-	@Autowired
-	private TargetGroupService targetGroupService;
-	
-	public  String createLoadBalance(Config config) {
-
+	public  Result  createLoadBalance(Config config) {
+		Result result = new Result();
 		try {
-			Environment environmentDefault = null;
+
 			Project projectDefault = null;
-			List<Rule> rulesDefault = null;
-			
+
 			for(VirtualHost virtualHost : config.getVirtualhosts()) {
 				Optional<Environment> environmentObj = config.getEnvironments().stream().filter(environment -> environment.getId().equals(virtualHost.getEnvironmentId())).findAny();
-				environmentDefault = environmentObj.get();
 				
 				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
 				projectDefault = projectObj.get();
 				
-				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault));
+				LoadBalancer loadBalancer = PojoUtil.fromToLoadBalancer(projectDefault,config);
+				loadBalanceService.createLoadBalance(loadBalancer);
 				
-			//	rulesDefault = virtualHost.getRules();
-				
-			//	for(Rule rule : rulesDefault) {
-			//		rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
-		//		}
-				
-				
+				for(Pool pool : config.getPools()) {
+					configureHealthCheck.configureHealthCheck(loadBalancer.getName(), pool.getProperties().getHealthCheckPath());
+				}
+		
+				result.setMensagem("loadBalance cadastrado com sucesso");
 			}
-		//	listenerService.createListener(null);
-		//	targetGroupService.createTargetGroup();
+
 		}catch(Exception e) {
+			result.setMensagem("Erro ao cadastrar HealthCheck");
 			logger.error("Erro na camada service",e);
 		}
-		
-		return null;
+		return result;
 	}
 	
 }
