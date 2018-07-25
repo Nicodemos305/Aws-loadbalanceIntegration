@@ -44,11 +44,11 @@ public class LoadBalanceService extends ServiceDefault{
 		    client.createLoadBalancer(lbRequest);
 			
 		}catch(DuplicateLoadBalancerNameException e1) {
-			result.getMensagens().add("Erro de  chave duplicacada na camada service");
-			logger.error("Erro de  chave duplicacada na camada service",e1);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e1.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e1.getMessage(),e1);
 		}catch(Exception e) {
-			result.getMensagens().add("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage());
-			logger.error("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);
 		}
 		
 		return result;

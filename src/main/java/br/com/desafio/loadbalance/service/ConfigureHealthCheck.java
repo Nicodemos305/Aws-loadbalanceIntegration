@@ -30,8 +30,8 @@ public class ConfigureHealthCheck extends ServiceDefault{
 			configureHealthCheckRequest.setLoadBalancerName(loadBalanceName);
 			client.configureHealthCheck(configureHealthCheckRequest);
 		}catch(Exception e) {
-			result.getMensagens().add("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage());
-			logger.error("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);
 		}
 		return result;
 	}

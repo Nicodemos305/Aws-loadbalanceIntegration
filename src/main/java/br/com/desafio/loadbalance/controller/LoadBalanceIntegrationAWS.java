@@ -40,8 +40,8 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 		try {
 			result =  loadBalanceIntegrationAWSservice.createLoadBalance(config,result);
 		}catch(Exception e) {
-			result.getMensagens().add("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage());
-			logger.error("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
 		}
 		
 		return  result;
@@ -60,8 +60,8 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 		try {
 			result =loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),result);
 		}catch(Exception e) {
-			result.getMensagens().add("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage());
-			logger.error("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
 		}
 		return result;
 	}
