@@ -120,6 +120,9 @@ public class Ressources {
 	@Value("${key}")
 	private String key;
 	
+	@Value("${secrectKey}")
+	private String secrectKey;
+	
 
 	
 	public String getCreateListener() {
@@ -377,6 +380,16 @@ public class Ressources {
 	public void setKey(String key) {
 		this.key = key;
 	}
+
+	public String getSecrectKey() {
+		return secrectKey;
+	}
+
+	public void setSecrectKey(String secrectKey) {
+		this.secrectKey = secrectKey;
+	}
+	
+	
 	
 	
 }

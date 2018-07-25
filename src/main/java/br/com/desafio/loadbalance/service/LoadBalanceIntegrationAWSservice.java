@@ -47,7 +47,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				rulesDefault = virtualHost.getRules();
 				
 				for(Rule rule : rulesDefault) {
-					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
+			//		rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
 				}
 				
 				
@@ -55,7 +55,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 		//	listenerService.createListener(null);
 		//	targetGroupService.createTargetGroup();
 		}catch(Exception e) {
-			logger.error("Erro na camada service");
+			logger.error("Erro na camada service",e);
 		}
 		
 		return null;

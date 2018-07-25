@@ -31,22 +31,7 @@ public class ControllerDefault  {
 	
 	private String signature;
 	
-	public String assinar(Ressources Ressources) {
-		if(signature != null) {
-			return signature;
-		}
-		Date dataStamp = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
-		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		try {
-			setSignature(AmazonSignature.recoveryAWSassignatureV4(ressources.getKey(),sdf.format(dataStamp).toString(),ressources.getRegionName(),ressources.getServiceName()));
-			return signature;
-		
-		} catch (Exception e) {
-			logger.error("Impossível gerar chave AWS v4",e);
-			return null;
-		}
-	}
+
 	
 	
 	public String getSignature() {
