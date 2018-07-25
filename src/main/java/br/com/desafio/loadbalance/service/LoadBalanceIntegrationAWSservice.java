@@ -23,8 +23,10 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	@Autowired
 	private ConfigureHealthCheck configureHealthCheck;
 	
-	public  Result  createLoadBalance(Config config) {
-		Result result = new Result();
+	@Autowired
+	private ListenerService listenerService;
+	
+	public  Result  createLoadBalance(Config config,Result result) {
 		try {
 
 			Project projectDefault = null;
@@ -36,18 +38,19 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				projectDefault = projectObj.get();
 				
 				LoadBalancer loadBalancer = PojoUtil.fromToLoadBalancer(projectDefault,config);
-				loadBalanceService.createLoadBalance(loadBalancer);
+				result=	loadBalanceService.createLoadBalance(loadBalancer,result);
 				
-				for(Pool pool : config.getPools()) {
-					configureHealthCheck.configureHealthCheck(loadBalancer.getName(), pool.getProperties().getHealthCheckPath());
+				if(loadBalancer != null) {
+					for(Pool pool : config.getPools()) {
+						result = configureHealthCheck.configureHealthCheck(loadBalancer.getName(), pool.getProperties().getHealthCheckPath(),result);
+					}
+					//listenerService.configurelistener(loadBalancer.getName());
 				}
-		
-				result.setMensagem("loadBalance cadastrado com sucesso");
 			}
 
 		}catch(Exception e) {
-			result.setMensagem("Erro ao cadastrar HealthCheck");
-			logger.error("Erro na camada service",e);
+			result.getMensagens().add("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage());
+			logger.error("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage(),e);
 		}
 		return result;
 	}

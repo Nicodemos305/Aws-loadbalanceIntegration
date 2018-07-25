@@ -8,10 +8,12 @@ import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingCli
 import com.amazonaws.services.elasticloadbalancing.model.ConfigureHealthCheckRequest;
 import com.amazonaws.services.elasticloadbalancing.model.HealthCheck;
 
+import br.com.desafio.loadbalance.model.Result;
+
 @Service
 public class ConfigureHealthCheck extends ServiceDefault{
 	
-	public void configureHealthCheck(String loadBalanceName,String target) {
+	public Result configureHealthCheck(String loadBalanceName,String target,Result result) {
 		try {
 			AWSCredentials credentials = new BasicAWSCredentials(ressources.getKey(), ressources.getSecrectKey());
 			AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(credentials);
@@ -28,7 +30,9 @@ public class ConfigureHealthCheck extends ServiceDefault{
 			configureHealthCheckRequest.setLoadBalancerName(loadBalanceName);
 			client.configureHealthCheck(configureHealthCheckRequest);
 		}catch(Exception e) {
-			logger.error("Erro na camada service",e);
+			result.getMensagens().add("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage());
+			logger.error("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage(),e);
 		}
+		return result;
 	}
 }

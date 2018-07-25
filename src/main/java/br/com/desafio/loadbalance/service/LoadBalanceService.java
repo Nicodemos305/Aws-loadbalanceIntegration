@@ -15,20 +15,18 @@ import com.amazonaws.services.elasticloadbalancing.model.DuplicateLoadBalancerNa
 import com.amazonaws.services.elasticloadbalancing.model.Listener;
 
 import br.com.desafio.loadbalance.aws.elb.model.LoadBalancer;
+import br.com.desafio.loadbalance.model.Result;
 
 @Service
 public class LoadBalanceService extends ServiceDefault{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public  String createLoadBalance(LoadBalancer loadBalancer) {
-		String  retorno = null;
+	public  Result createLoadBalance(LoadBalancer loadBalancer,Result result) {
 		try {
 	
 			AWSCredentials credentials = new BasicAWSCredentials(ressources.getKey(), ressources.getSecrectKey());
-			
 			AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(credentials);
-			
 			client.builder().setRegion(ressources.getRegionName());
 			client.setEndpoint(ressources.getUrlAwsElb());
 				
@@ -43,16 +41,17 @@ public class LoadBalanceService extends ServiceDefault{
 		    lbRequest.setListeners(lista);
 		    lbRequest.setLoadBalancerName(loadBalancer.getName());
 		    lbRequest.setSubnets(loadBalancer.getSubNets());
-	
 		    client.createLoadBalancer(lbRequest);
 			
 		}catch(DuplicateLoadBalancerNameException e1) {
+			result.getMensagens().add("Erro de  chave duplicacada na camada service");
 			logger.error("Erro de  chave duplicacada na camada service",e1);
 		}catch(Exception e) {
-			logger.error("Erro na camada service",e);
+			result.getMensagens().add("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage());
+			logger.error("Classe"+this.getClass().getName()+" Erro na camada service "+e.getMessage(),e);
 		}
 		
-		return retorno;
+		return result;
 	}
 	
 	

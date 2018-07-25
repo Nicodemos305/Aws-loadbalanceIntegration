@@ -3,7 +3,6 @@ package br.com.desafio.loadbalance.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-
 /** 
  * 
  * Classe com os recursos utilizados pela aplicação 
@@ -33,7 +32,6 @@ public class Ressources {
 
 	@Value("${aws.action.elb.DeleteLoadBalancer}")
 	private String DeleteLoadBalancer;
-	
 
 	@Value("${aws.action.elb.DeleteRule}")
 	private String DeleteRule;

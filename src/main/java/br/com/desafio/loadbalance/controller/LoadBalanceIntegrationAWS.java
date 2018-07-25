@@ -1,5 +1,8 @@
 package br.com.desafio.loadbalance.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,11 +34,14 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	*/
 	@PostMapping("/createLoadBalance")
 	public  @ResponseBody Result createLoadBalance(@RequestBody(required=true) Config config) {
-		Result result = null;
+		Result result = new Result();
+		List<String> listaMensagens = new ArrayList<String>();
+		result.setMensagens(listaMensagens);
 		try {
-			 result = loadBalanceIntegrationAWSservice.createLoadBalance(config);
+			result =  loadBalanceIntegrationAWSservice.createLoadBalance(config,result);
 		}catch(Exception e) {
-			logger.error("Erro na camada de controle"+e.getMessage(),e);
+			result.getMensagens().add("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage());
+			logger.error("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage(),e);
 		}
 		
 		return  result;
@@ -47,12 +53,16 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	 * @param  Srting path
 	*/
 	@PostMapping("/createLoadBalancePath")
-	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) String path) {
+	public  @ResponseBody Result createLoadBalancePath(@RequestBody(required=true) String path) {
+		Result result = new Result();
+		List<String> listaMensagens = new ArrayList<String>();
+		result.setMensagens(listaMensagens);
 		try {
-			loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path));
+			result =loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),result);
 		}catch(Exception e) {
-			logger.error("Erro na camada de controle"+e.getMessage(),e);
+			result.getMensagens().add("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage());
+			logger.error("Classe "+this.getClass().getName()+" Erro na camada Controller "+e.getMessage(),e);
 		}
-		return null;
+		return result;
 	}
 }
