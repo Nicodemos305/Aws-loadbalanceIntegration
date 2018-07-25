@@ -32,8 +32,7 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	public  @ResponseBody Config createLoadBalance(@RequestBody(required=true) Config config) {
 		try {
 			
-			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalance(config,getSignature());
+			loadBalanceIntegrationAWSservice.createLoadBalance(config);
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}
@@ -48,8 +47,7 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	@PostMapping("/createLoadBalancePath")
 	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) String path) {
 		try {
-			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),getSignature());
+			loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path));
 		}catch(Exception e) {
 			logger.error("Erro na camada de controle"+e.getMessage(),e);
 		}

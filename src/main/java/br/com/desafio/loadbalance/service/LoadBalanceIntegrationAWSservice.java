@@ -28,7 +28,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	@Autowired
 	private TargetGroupService targetGroupService;
 	
-	public  String createLoadBalance(Config config,String signature) {
+	public  String createLoadBalance(Config config) {
 
 		try {
 			Environment environmentDefault = null;
@@ -41,14 +41,14 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				
 				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
 				projectDefault = projectObj.get();
-				loadBalanceService.setRestTemplate(this.restTemplate);
-				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault),signature);
 				
-				rulesDefault = virtualHost.getRules();
+				loadBalanceService.createLoadBalance(PojoUtil.fromToLoadBalancer(projectDefault));
 				
-				for(Rule rule : rulesDefault) {
+			//	rulesDefault = virtualHost.getRules();
+				
+			//	for(Rule rule : rulesDefault) {
 			//		rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
-				}
+		//		}
 				
 				
 			}
