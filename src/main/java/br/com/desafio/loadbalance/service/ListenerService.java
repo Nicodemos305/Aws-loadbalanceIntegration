@@ -9,6 +9,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
 import com.amazonaws.services.elasticloadbalancing.model.CreateLoadBalancerListenersRequest;
+import com.amazonaws.services.elasticloadbalancing.model.DuplicateListenerException;
 import com.amazonaws.services.elasticloadbalancing.model.Listener;
 
 import br.com.desafio.loadbalance.model.Result;
@@ -32,6 +33,9 @@ public class ListenerService extends ServiceDefault{
 			createLoadBalancerListenersRequest.setListeners(listeners);
 			client.createLoadBalancerListeners(createLoadBalancerListenersRequest);
 			result.getMensagens().add("ListenerConfigrado para o ELB "+loadBalanceName);
+		}catch(DuplicateListenerException e1) {
+			result.getMensagens().add("Listener já existente");
+			logger.error("Listener já existente",e1);
 		}catch(Exception e) {
 			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
 			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);

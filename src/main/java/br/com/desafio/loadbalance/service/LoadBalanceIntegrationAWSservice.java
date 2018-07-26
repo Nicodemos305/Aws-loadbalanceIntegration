@@ -28,12 +28,10 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 	
 	public  Result  createLoadBalance(Config config,Result result) {
 		try {
-
 			Project projectDefault = null;
 
 			for(VirtualHost virtualHost : config.getVirtualhosts()) {
 				Optional<Environment> environmentObj = config.getEnvironments().stream().filter(environment -> environment.getId().equals(virtualHost.getEnvironmentId())).findAny();
-				
 				Optional<Project> projectObj = config.getProjects().stream().filter(project -> project.getId().equals(virtualHost.getProjectId())).findAny();
 				projectDefault = projectObj.get();
 				
@@ -44,10 +42,9 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 					for(Pool pool : config.getPools()) {
 						result = configureHealthCheck.configureHealthCheck(loadBalancer.getName(), pool.getProperties().getHealthCheckPath(),result);
 					}
-					//listenerService.configurelistener(loadBalancer.getName());
+					result = listenerService.configurelistener(loadBalancer.getName(),result);
 				}
 			}
-
 		}catch(Exception e) {
 			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage());
 			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgService()+e.getMessage(),e);
