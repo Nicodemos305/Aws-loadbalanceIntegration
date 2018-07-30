@@ -7,9 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
 import com.amazonaws.services.elasticloadbalancing.model.CreateLoadBalancerRequest;
 import com.amazonaws.services.elasticloadbalancing.model.DuplicateLoadBalancerNameException;
 import com.amazonaws.services.elasticloadbalancing.model.Listener;
@@ -24,12 +21,6 @@ public class LoadBalanceService extends ServiceDefault{
 	
 	public  Result createLoadBalance(LoadBalancer loadBalancer,Result result) {
 		try {
-	
-			AWSCredentials credentials = new BasicAWSCredentials(ressources.getKey(), ressources.getSecrectKey());
-			AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(credentials);
-			client.builder().setRegion(ressources.getRegionName());
-			client.setEndpoint(ressources.getUrlAwsElb());
-				
 		    CreateLoadBalancerRequest lbRequest = new CreateLoadBalancerRequest();
 		    Listener listener = new Listener();
 		    listener.setInstancePort(8081);

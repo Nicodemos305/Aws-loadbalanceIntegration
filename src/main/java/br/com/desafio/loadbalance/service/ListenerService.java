@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
 import com.amazonaws.services.elasticloadbalancing.model.CreateLoadBalancerListenersRequest;
 import com.amazonaws.services.elasticloadbalancing.model.DuplicateListenerException;
 import com.amazonaws.services.elasticloadbalancing.model.Listener;
@@ -19,8 +16,6 @@ public class ListenerService extends ServiceDefault{
 	
 	public Result configurelistener(String loadBalanceName,Result result) {
 		try {
-			AWSCredentials credentials = new BasicAWSCredentials(ressources.getKey(), ressources.getSecrectKey());
-			AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(credentials);
 			CreateLoadBalancerListenersRequest createLoadBalancerListenersRequest = new  CreateLoadBalancerListenersRequest();
 			createLoadBalancerListenersRequest.setLoadBalancerName(loadBalanceName);
 			Listener listener = new Listener();
