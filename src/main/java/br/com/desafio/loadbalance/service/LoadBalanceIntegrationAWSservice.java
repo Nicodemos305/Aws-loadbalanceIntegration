@@ -47,7 +47,7 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 				rulesDefault = virtualHost.getRules();
 				
 				for(Rule rule : rulesDefault) {
-			//		rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
+					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
 				}
 				
 				
