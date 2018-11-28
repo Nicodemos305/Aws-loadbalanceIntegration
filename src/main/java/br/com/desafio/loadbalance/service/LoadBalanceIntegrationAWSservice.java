@@ -43,6 +43,10 @@ public class LoadBalanceIntegrationAWSservice extends ServiceDefault{
 						result = configureHealthCheck.configureHealthCheck(loadBalancer.getName(), pool.getProperties().getHealthCheckPath(),result);
 					}
 					result = listenerService.configurelistener(loadBalancer.getName(),result);
+
+				for(Rule rule : rulesDefault) {
+					rulesService.createRule(PojoUtil.fromToRule(rule,config.getRuleTypes(),config.getPools()),signature);
+
 				}
 			}
 		}catch(Exception e) {

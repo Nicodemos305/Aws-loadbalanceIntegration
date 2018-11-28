@@ -38,3 +38,4 @@ local.properties
 /nbdist/
 /.nb-gradle/
 /.apt_generated_tests/
+/.metadata/

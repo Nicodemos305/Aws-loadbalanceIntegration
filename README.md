@@ -1,4 +1,4 @@
-# Loadbalance
+# Aws-loadbalanceIntegration
 Projeto destinado a configuração de um AWS ELB (Amazon Webservices Elastic LoadBalance).
 
 # Requisitos:
