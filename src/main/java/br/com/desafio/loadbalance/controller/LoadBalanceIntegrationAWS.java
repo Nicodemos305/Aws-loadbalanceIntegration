@@ -1,5 +1,8 @@
 package br.com.desafio.loadbalance.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.desafio.loadbalance.model.Config;
+import br.com.desafio.loadbalance.model.Result;
 import br.com.desafio.loadbalance.service.LoadBalanceIntegrationAWSservice;
 
 
@@ -29,15 +33,18 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	 * @param  Config config
 	*/
 	@PostMapping("/createLoadBalance")
-	public  @ResponseBody Config createLoadBalance(@RequestBody(required=true) Config config) {
+	public  @ResponseBody Result createLoadBalance(@RequestBody(required=true) Config config) {
+		Result result = new Result();
+		List<String> listaMensagens = new ArrayList<String>();
+		result.setMensagens(listaMensagens);
 		try {
-			
-			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalance(config,getSignature());
+			result =  loadBalanceIntegrationAWSservice.createLoadBalance(config,result);
 		}catch(Exception e) {
-			logger.error("Erro na camada de controle"+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
 		}
-		return config;
+		
+		return  result;
 	}
 	
 	/** 
@@ -46,13 +53,16 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	 * @param  Srting path
 	*/
 	@PostMapping("/createLoadBalancePath")
-	public  @ResponseBody Config createLoadBalancePath(@RequestBody(required=true) String path) {
+	public  @ResponseBody Result createLoadBalancePath(@RequestBody(required=true) String path) {
+		Result result = new Result();
+		List<String> listaMensagens = new ArrayList<String>();
+		result.setMensagens(listaMensagens);
 		try {
-			loadBalanceIntegrationAWSservice.setRestTemplate(builder);
-			loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),getSignature());
+			result =loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),result);
 		}catch(Exception e) {
-			logger.error("Erro na camada de controle"+e.getMessage(),e);
+			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
+			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
 		}
-		return null;
+		return result;
 	}
 }

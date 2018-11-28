@@ -1,5 +1,7 @@
 package br.com.desafio.loadbalance.aws.elb.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -9,11 +11,8 @@ public class LoadBalancer {
 
 	@JsonProperty("name")
 	private String name;
-	@JsonProperty("subnet")
-	private String subnet;
-	@JsonProperty("subnet2")
-	private String subnet2;
-	@JsonProperty("version")
-	private String version;
+	@JsonProperty("subNets")
+	private List<String> subNets;
+
 
 }

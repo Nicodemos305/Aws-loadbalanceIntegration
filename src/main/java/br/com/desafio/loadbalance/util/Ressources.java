@@ -3,7 +3,6 @@ package br.com.desafio.loadbalance.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-
 /** 
  * 
  * Classe com os recursos utilizados pela aplicação 
@@ -33,7 +32,6 @@ public class Ressources {
 
 	@Value("${aws.action.elb.DeleteLoadBalancer}")
 	private String DeleteLoadBalancer;
-	
 
 	@Value("${aws.action.elb.DeleteRule}")
 	private String DeleteRule;
@@ -123,7 +121,14 @@ public class Ressources {
 	@Value("${secrectKey}")
 	private String secrectKey;
 	
-
+	@Value("${msg.erro.controller}")
+	private String msgController;
+	
+	@Value("${msg.erro.service}")
+	private String msgService;
+	
+	@Value("${msg.classe}")
+	private String msgClasse;
 	
 	public String getCreateListener() {
 		return CreateListener;
@@ -388,8 +393,29 @@ public class Ressources {
 	public void setSecrectKey(String secrectKey) {
 		this.secrectKey = secrectKey;
 	}
-	
-	
-	
+
+	public String getMsgController() {
+		return msgController;
+	}
+
+	public void setMsgController(String msgController) {
+		this.msgController = msgController;
+	}
+
+	public String getMsgService() {
+		return msgService;
+	}
+
+	public void setMsgService(String msgService) {
+		this.msgService = msgService;
+	}
+
+	public String getMsgClasse() {
+		return msgClasse;
+	}
+
+	public void setMsgClasse(String msgClasse) {
+		this.msgClasse = msgClasse;
+	}
 	
 }
