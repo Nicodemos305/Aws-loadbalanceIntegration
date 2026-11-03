@@ -2,12 +2,8 @@ package br.com.desafio.loadbalance.model;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,8 +17,6 @@ public class Config  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2383499243592305076L;
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@JsonProperty("environments")
 	private List<Environment> environments;
@@ -38,15 +32,18 @@ public class Config  implements Serializable{
 	private List<VirtualHost> virtualhosts;
 	
 	public static Config deserealize(String path) {
-		byte[] jsonData;
-		try {
-			jsonData = Files.readAllBytes(Paths.get("src/main/resources/config.json"));
+		if (path == null || path.trim().isEmpty()) {
+			throw new IllegalArgumentException("O caminho do arquivo de configuração é obrigatório.");
+		}
+		if (path.contains("/") || path.contains("\\") || path.contains("..")) {
+			throw new IllegalArgumentException("Informe apenas o nome de um arquivo de configuração do classpath.");
+		}
+		try (java.io.InputStream input = Config.class.getClassLoader().getResourceAsStream(path)) {
+			if (input == null) throw new IllegalArgumentException("Configuração não encontrada no classpath: " + path);
 			ObjectMapper objectMapper = JsonUtil.initJsonMapper();
-			Config config = objectMapper.readValue(jsonData, Config.class);
-			return config;
+			return objectMapper.readValue(input, Config.class);
 		} catch (IOException e) {
-			//logger.error("Erro ao deserializar objeto Config "+e.getMessage(),e);
-			return null;
+			throw new IllegalArgumentException("Não foi possível ler a configuração em: " + path, e);
 		}
 	}
  	
