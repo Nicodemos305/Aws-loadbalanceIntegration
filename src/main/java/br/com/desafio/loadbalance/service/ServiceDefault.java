@@ -2,11 +2,13 @@ package br.com.desafio.loadbalance.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
+import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClientBuilder;
 
 import br.com.desafio.loadbalance.util.Ressources;
 
@@ -17,15 +19,14 @@ public class ServiceDefault {
 	@Autowired
 	protected Ressources ressources;
 	
-	protected AWSCredentials credentials;
 	protected AmazonElasticLoadBalancingClient client;
-	
-	
-	public ServiceDefault() {
-		 credentials = new BasicAWSCredentials(ressources.getKey(), ressources.getSecrectKey());
-		 client = new AmazonElasticLoadBalancingClient(credentials);
-		client.builder().setRegion(ressources.getRegionName());
-		client.setEndpoint(ressources.getUrlAwsElb());
+
+	@PostConstruct
+	public void initializeClient() {
+		client = (AmazonElasticLoadBalancingClient) AmazonElasticLoadBalancingClientBuilder.standard()
+				.withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
+				.withRegion(ressources.getRegionName())
+				.build();
 	}
 	
 }

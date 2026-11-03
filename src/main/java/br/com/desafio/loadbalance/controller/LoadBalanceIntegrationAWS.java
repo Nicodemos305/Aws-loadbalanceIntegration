@@ -1,10 +1,11 @@
 package br.com.desafio.loadbalance.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,11 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 
 	@Autowired
 	private LoadBalanceIntegrationAWSservice loadBalanceIntegrationAWSservice;
+
+	@GetMapping("/health")
+	public String health() {
+		return "UP";
+	}
 	
 	/** 
 	 * 
@@ -34,14 +40,13 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	*/
 	@PostMapping("/createLoadBalance")
 	public  @ResponseBody Result createLoadBalance(@RequestBody(required=true) Config config) {
-		Result result = new Result();
-		List<String> listaMensagens = new ArrayList<String>();
-		result.setMensagens(listaMensagens);
+		Result result = newResult();
 		try {
 			result =  loadBalanceIntegrationAWSservice.createLoadBalance(config,result);
 		}catch(Exception e) {
-			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
-			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
+			result.setCodigo("400");
+			result.getMensagens().add("Não foi possível processar a configuração.");
+			logger.error("Falha ao processar configuração",e);
 		}
 		
 		return  result;
@@ -52,17 +57,22 @@ public class LoadBalanceIntegrationAWS extends ControllerDefault{
 	 * Método responsável por criar um LoadBalance atráves de um Path
 	 * @param  Srting path
 	*/
-	@PostMapping("/createLoadBalancePath")
-	public  @ResponseBody Result createLoadBalancePath(@RequestBody(required=true) String path) {
-		Result result = new Result();
-		List<String> listaMensagens = new ArrayList<String>();
-		result.setMensagens(listaMensagens);
+	@GetMapping("/createLoadBalancePath")
+	public  @ResponseBody Result createLoadBalancePath(@RequestParam("path") String path) {
+		Result result = newResult();
 		try {
 			result =loadBalanceIntegrationAWSservice.createLoadBalance(Config.deserealize(path),result);
 		}catch(Exception e) {
-			result.getMensagens().add(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage()+e.getMessage());
-			logger.error(ressources.getMsgClasse()+this.getClass().getName()+ressources.getMsgController()+e.getMessage(),e);
+			result.setCodigo("400");
+			result.getMensagens().add("Não foi possível ler a configuração informada.");
+			logger.error("Falha ao ler configuração",e);
 		}
+		return result;
+	}
+
+	private Result newResult() {
+		Result result = new Result();
+		result.setMensagens(new ArrayList<String>());
 		return result;
 	}
 }

@@ -12,9 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Ressources {
 
-	@Value("${url.elb.amazon}")
-	private String UrlAwsElb;
-	
 	@Value("${aws.action.elb.CreateListener}")
 	private String CreateListener;
 	
@@ -114,12 +111,6 @@ public class Ressources {
 	
 	@Value("${aws.action.elb.SetSubnets}")
 	private String SetSubnets;
-	
-	@Value("${key}")
-	private String key;
-	
-	@Value("${secrectKey}")
-	private String secrectKey;
 	
 	@Value("${msg.erro.controller}")
 	private String msgController;
@@ -354,14 +345,6 @@ public class Ressources {
 		SetSubnets = setSubnets;
 	}
 
-	public String getUrlAwsElb() {
-		return UrlAwsElb;
-	}
-
-	public void setUrlAwsElb(String urlAwsElb) {
-		UrlAwsElb = urlAwsElb;
-	}
-
 	public String getServiceName() {
 		return serviceName;
 	}
@@ -376,22 +359,6 @@ public class Ressources {
 
 	public void setRegionName(String regionName) {
 		this.regionName = regionName;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getSecrectKey() {
-		return secrectKey;
-	}
-
-	public void setSecrectKey(String secrectKey) {
-		this.secrectKey = secrectKey;
 	}
 
 	public String getMsgController() {

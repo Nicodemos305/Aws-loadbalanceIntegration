@@ -1,6 +1,7 @@
 package br.com.desafio.loadbalance.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 
 public class Properties extends Base{
@@ -16,6 +17,10 @@ public class Properties extends Base{
 	private String healthCheckPath;
 	@JsonProperty("loadBalancePolicy")
 	private String loadBalancePolicy;
+	@JsonProperty("targets")
+	private List<Target> targets;
+	public List<Target> getTargets() { return targets; }
+	public void setTargets(List<Target> targets) { this.targets = targets; }
 	
 	public String getHealthy() {
 		return healthy;
